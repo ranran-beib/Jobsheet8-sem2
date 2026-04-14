@@ -2,6 +2,22 @@ import java.util.Scanner;
 
 public class main {
 
+    // Modifyed
+    // ===== INSERTION SORT Buku berdasarkan tahun terbit (ascending) =====
+    static void sortBukuByTahun(Buku[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+            Buku key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j].tahunTerbit > key.tahunTerbit) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
     // ===== INSERTION SORT berdasarkan denda terbesar =====
     static void insertionSort(Peminjaman[] arr) {
         int n = arr.length;
@@ -103,6 +119,7 @@ public class main {
             System.out.println("3. Tampilkan Peminjaman");
             System.out.println("4. Urutkan Berdasarkan Denda");
             System.out.println("5. Cari Berdasarkan NIM");
+            System.out.println("6. Urutkan Buku Berdasarkan Tahun Terbit (Ascending)"); //Modifyed
             System.out.println("0. Keluar");
             System.out.print("Pilih: ");
             pilih = sc.nextInt();
@@ -143,6 +160,17 @@ public class main {
                     System.out.print("Masukkan NIM: ");
                     String nim = sc.next();
                     binarySearchNim(peminjamans, nim);
+                    break;
+
+                //Modufyed
+                case 6:
+                    Buku[] sortedBuku = bukus.clone(); // agar data asli tidak berubah
+                    sortBukuByTahun(sortedBuku);
+
+                    System.out.println("\nBuku setelah diurutkan (Tahun terbit lama => baru):");
+                    for (Buku b : sortedBuku) {
+                        b.tampilBuku();
+                    }
                     break;
 
                 case 0:
